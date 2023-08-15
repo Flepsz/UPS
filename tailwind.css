@@ -1,3 +1,23 @@
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  
+}
+
 .static {
   position: static
 }
@@ -14,10 +34,6 @@
   position: relative
 }
 
-.sticky {
-  position: sticky
-}
-
 .block {
   display: block
 }
@@ -30,110 +46,49 @@
   display: flex
 }
 
-.inline-flex {
-  display: inline-flex
-}
-
-.table {
-  display: table
-}
-
-.grid {
-  display: grid
-}
-
-.contents {
-  display: contents
-}
-
 .hidden {
   display: none
 }
 
-.flex-shrink {
-  flex-shrink: 1
+.h-64 {
+  height: 16rem
 }
 
-.shrink {
-  flex-shrink: 1
-}
-
-.flex-grow {
-  flex-grow: 1
-}
-
-.grow {
-  flex-grow: 1
+.w-full {
+  width: 100%
 }
 
 .border {
   border-width: 1px
 }
 
-.bg-green-100 {
+.bg-cyansc {
   --tw-bg-opacity: 1;
-  background-color: rgb(220 252 231 / var(--tw-bg-opacity))
+  background-color: rgb(89 193 204 / var(--tw-bg-opacity))
 }
 
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.font-semibold {
-  font-weight: 600
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem
+}
+
+.pb-0 {
+  padding-bottom: 0px
+}
+
+.pt-5 {
+  padding-top: 1.25rem
 }
 
 .uppercase {
   text-transform: uppercase
 }
 
-.lowercase {
-  text-transform: lowercase
-}
-
 .capitalize {
   text-transform: capitalize
-}
-
-.italic {
-  font-style: italic
-}
-
-.lining-nums {
-  --tw-numeric-figure: lining-nums;
-  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)
-}
-
-.oldstyle-nums {
-  --tw-numeric-figure: oldstyle-nums;
-  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)
-}
-
-.proportional-nums {
-  --tw-numeric-spacing: proportional-nums;
-  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)
-}
-
-.tabular-nums {
-  --tw-numeric-spacing: tabular-nums;
-  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)
-}
-
-.tracking-\[a-z\] {
-  letter-spacing: a-z
-}
-
-.tracking-tighter {
-  letter-spacing: -0.05em
-}
-
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity))
-}
-
-.text-green-800 {
-  --tw-text-opacity: 1;
-  color: rgb(22 101 52 / var(--tw-text-opacity))
 }
