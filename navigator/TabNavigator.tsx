@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CostumersScreen from "../screens/CostumersScreen";
+import CustomersScreen from "../screens/CustomersScreen";
 import OrdersScreen from "../screens/OrdersScreen";
 import { useNavigation } from "@react-navigation/native";
 import { useLayoutEffect } from "react";
@@ -46,7 +46,7 @@ const TabNavigator = () => {
 				},
 			})}
 		>
-			<Tab.Screen name="Customers" component={CostumersScreen} />
+			<Tab.Screen name="Customers" component={CustomersScreen} />
 			<Tab.Screen name="Orders" component={OrdersScreen} />
 		</Tab.Navigator>
 	);
