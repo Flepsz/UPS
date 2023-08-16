@@ -1,13 +1,13 @@
-import { View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CostumersScreen from "../screens/CostumersScreen";
+import CustomersScreen from "../screens/CustomersScreen";
 import OrdersScreen from "../screens/OrdersScreen";
 import { useNavigation } from "@react-navigation/native";
 import { useLayoutEffect } from "react";
+import { Icon } from "@rneui/themed";
 
 export type TabStackParamList = {
-	Costumers: undefined;
-	orders: undefined;
+	Customers: undefined;
+	Orders: undefined;
 };
 
 const Tab = createBottomTabNavigator<TabStackParamList>();
@@ -15,13 +15,38 @@ const Tab = createBottomTabNavigator<TabStackParamList>();
 const TabNavigator = () => {
 	const navigation = useNavigation();
 	useLayoutEffect(() => {
-        
-		return () => {};
+		navigation.setOptions({
+			headerShown: false,
+		});
 	}, []);
 
 	return (
-		<Tab.Navigator>
-			<Tab.Screen name="Customers" component={CostumersScreen} />
+		<Tab.Navigator
+			screenOptions={({ route }) => ({
+				tabBarActiveTintColor: "#59C1CC",
+				tabBarInactiveTintColor: "gray",
+				tabBarIcon: ({ focused, color, size }) => {
+					if (route.name === "Customers") {
+						return (
+							<Icon
+								name="users"
+								type="entypo"
+								color={focused ? "#59C1CC" : "gray"}
+							/>
+						);
+					} else if (route.name === "Orders") {
+						return (
+							<Icon
+								name="box"
+								type="entypo"
+								color={focused ? "#EB6A7C" : "gray"}
+							/>
+						)
+					}
+				},
+			})}
+		>
+			<Tab.Screen name="Customers" component={CustomersScreen} />
 			<Tab.Screen name="Orders" component={OrdersScreen} />
 		</Tab.Navigator>
 	);

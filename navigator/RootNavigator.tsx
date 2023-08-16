@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text } from "react-native";
 import TabNavigator from "./TabNavigator";
 
 export type RootStackParamsList = {
