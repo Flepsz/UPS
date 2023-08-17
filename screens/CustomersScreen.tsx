@@ -34,7 +34,7 @@ const CustomersScreen = () => {
 	return (
 		<ScrollView style={tw("bg-cyansc")}>
 			<Image
-				source={{ uri: "https://links.papareact.com/3jc" }}
+				source={{ uri: "https://i.imgur.com/uU8GTZM.jpeg" }}
 				containerStyle={tw("w-full h-64")}
 				PlaceholderContent={<ActivityIndicator />}
 			/>
