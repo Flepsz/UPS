@@ -45,7 +45,7 @@ const OrdersScreen = () => {
 	return (
 		<ScrollView style={{ backgroundColor: "#EB6A7C" }}>
 			<Image
-				source={{ uri: "https://links.papareact.com/m51" }}
+				source={{ uri: "http://bit.ly/3YHgNeo" }}
 				containerStyle={tw("w-full h-64")}
 				PlaceholderContent={<ActivityIndicator />}
 			/>
