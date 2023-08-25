@@ -108,9 +108,19 @@
 			"marginTop": -12
 		}
 	},
+	"mb-3": {
+		"style": {
+			"marginBottom": 12
+		}
+	},
 	"mb-5": {
 		"style": {
 			"marginBottom": 20
+		}
+	},
+	"ml-1": {
+		"style": {
+			"marginLeft": 4
 		}
 	},
 	"ml-2": {
@@ -136,6 +146,11 @@
 	"mt-5": {
 		"style": {
 			"marginTop": 20
+		}
+	},
+	"mt-3": {
+		"style": {
+			"marginTop": 12
 		}
 	},
 	"block": {
@@ -218,6 +233,14 @@
 			"borderBottomLeftRadius": 8
 		}
 	},
+	"rounded-md": {
+		"style": {
+			"borderTopLeftRadius": 6,
+			"borderTopRightRadius": 6,
+			"borderBottomRightRadius": 6,
+			"borderBottomLeftRadius": 6
+		}
+	},
 	"rounded-none": {
 		"style": {
 			"borderTopLeftRadius": 0,
@@ -266,6 +289,12 @@
 			"backgroundColor": "rgb(89 193 204 / var(--tw-bg-opacity))"
 		}
 	},
+	"bg-purple-700": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(126 34 206 / var(--tw-bg-opacity))"
+		}
+	},
 	"bg-white": {
 		"style": {
 			"--tw-bg-opacity": 1,
@@ -298,6 +327,12 @@
 		"style": {
 			"paddingLeft": 20,
 			"paddingRight": 20
+		}
+	},
+	"px-6": {
+		"style": {
+			"paddingLeft": 24,
+			"paddingRight": 24
 		}
 	},
 	"py-2": {
@@ -338,6 +373,12 @@
 			"lineHeight": 32
 		}
 	},
+	"text-4xl": {
+		"style": {
+			"fontSize": 36,
+			"lineHeight": 40
+		}
+	},
 	"text-base": {
 		"style": {
 			"fontSize": 16,
@@ -373,6 +414,11 @@
 			"fontWeight": "700"
 		}
 	},
+	"font-semibold": {
+		"style": {
+			"fontWeight": "600"
+		}
+	},
 	"uppercase": {
 		"style": {
 			"textTransform": "uppercase"
@@ -400,6 +446,18 @@
 			"color": "rgb(107 114 128 / var(--tw-text-opacity))"
 		}
 	},
+	"text-neutral-500": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(115 115 115 / var(--tw-text-opacity))"
+		}
+	},
+	"text-purple-700": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(126 34 206 / var(--tw-text-opacity))"
+		}
+	},
 	"text-red-500": {
 		"style": {
 			"--tw-text-opacity": 1,
@@ -410,6 +468,11 @@
 		"style": {
 			"--tw-text-opacity": 1,
 			"color": "rgb(255 255 255 / var(--tw-text-opacity))"
+		}
+	},
+	"underline": {
+		"style": {
+			"textDecorationLine": "underline"
 		}
 	}
 }

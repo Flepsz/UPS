@@ -6,7 +6,7 @@ import LoginScreen from "../screens/LoginScreen";
 import React, { useState } from "react";
 
 export type RootStackParamsList = {
-	Login: { user: String; password: string}
+	Login: { user: String; password: string };
 	Main: undefined;
 	MyModal: { userId: string; name: string };
 	Order: { order: Order };
@@ -15,10 +15,13 @@ export type RootStackParamsList = {
 const RootStack = createNativeStackNavigator<RootStackParamsList>();
 
 const RootNavigator = () => {
-	const [user, setUser] = useState(null)
+	const [user, setUser] = useState(false);
+	const handleUserLogin = () => {
+		setUser(true);
+	};
 	return (
 		<RootStack.Navigator>
-			{ user ? (
+			{user ? (
 				<RootStack.Group>
 					<RootStack.Group>
 						<RootStack.Screen name="Main" component={TabNavigator} />
@@ -38,11 +41,17 @@ const RootNavigator = () => {
 						<RootStack.Screen name="Order" component={OrderScreen} />
 					</RootStack.Group>
 				</RootStack.Group>
-        ) : (
-          <RootStack.Group>
-						<RootStack.Screen name="Login" component={LoginScreen} />
-					</RootStack.Group>
-        )}
+			) : (
+				<RootStack.Group>
+					<RootStack.Screen
+						name="Login"
+						options={{ headerShown: false }}
+						component={(props: any): React.ReactNode => (
+							<LoginScreen {...props} onLoginSuccess={handleUserLogin} />
+						)}
+					/>
+				</RootStack.Group>
+			)}
 		</RootStack.Navigator>
 	);
 };

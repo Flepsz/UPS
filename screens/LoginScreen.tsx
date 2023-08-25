@@ -1,72 +1,144 @@
-import React, { useState } from "react";
-import { View, TextInput, Button, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { Image } from "@rneui/themed";
 import { useTailwind } from "tailwind-rn";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamsList } from "../navigator/RootNavigator";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
+import {
+	getAuth,
+	signInWithEmailAndPassword,
+	createUserWithEmailAndPassword,
+} from "firebase/auth";
 import app from "../firebase/config";
+import Input from "../components/Input";
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamsList>;
 
 type Props = {
 	userId: string;
 	name: string;
+	onLoginSuccess: () => void;
 };
 
-const LoginScreen = ({ userId, name }: Props) => {
-	const auth = getAuth(app)
+function sleep(milliseconds: number, action: any): void {
+	action;
+	const start = new Date().getTime();
+	while (new Date().getTime() - start < milliseconds) {}
+}
+
+const LoginScreen = ({ userId, name, onLoginSuccess }: Props) => {
+	const auth = getAuth(app);
 	const tw = useTailwind();
-	const navigation = useNavigation<LoginScreenNavigationProp>();
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [userName, setUserName] = useState<string>("");
+	const [email, setEmail] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
 	const [error, setError] = useState(null);
+	const [variant, setVariant] = useState<string>("login");
+	const [message, setMessage] = useState<any>();
+
+	const toggleVariant = useCallback(() => {
+		setError(null);
+		setMessage(null);
+		setPassword("")
+		setVariant((currentVariant) =>
+			currentVariant === "login" ? "register" : "login"
+		);
+	}, []);
+
+	const eMessageLogin = (e: any) => {
+		if (e.code === "auth/wrong-password") {
+			e.message = "Wrong password, try again...";
+			setError(e.message);
+		} else if (e.code === "auth/invalid-email") {
+			e.message = "Invalid email address.";
+			setError(e.message);
+		} else if (e.code === "auth/email-already-in-use") {
+			e.message = "Email is already in use.";
+			setError(e.message);
+		} else {
+			setError(e.message);
+		}
+	};
+
+	const eMessageSignup = (e: any) => {
+		if (e.code === "auth/email-already-in-use") {
+			e.message = "Email is already in use.";
+			setError(e.message);
+		} else if (e.code === "auth/invalid-email") {
+			e.message = "Invalid email address.";
+			setError(e.message);
+		} else if (e.code === "auth/weak-password") {
+			e.message = "Password is too weak. Please use a stronger password.";
+			setError(e.message);
+		} else {
+			setError(e.message);
+		}
+	};
 
 	const signUp = () => {
-			createUserWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				console.log("user: ", userCredential);
+		setMessage(null);
+		setError(null);
+		createUserWithEmailAndPassword(auth, email, password)
+			.then(() => {
+				setMessage("User created with success!");
+				setVariant("login");
+				setPassword("");
 			})
-			.catch(error => {
-				if (error.code === "auth/email-already-in-use") {
-					console.log("email already in use!");
-				}
-				if (error.code === "auth/invalid-email") {
-					console.log("invalid email");
-					
-				}
-			})
+			.catch((e) => {
+				eMessageSignup(e);
+			});
 	};
 
 	const handleLogin = () => {
 		setError(null);
-
-			signInWithEmailAndPassword(auth, email, password)
+		setMessage(null);
+		signInWithEmailAndPassword(auth, email, password)
 			.then(() => {
-				navigation.navigate("MyModal", { name: name, userId: userId});
+				onLoginSuccess();
 			})
 			.catch((e) => {
-				setError(e.message);
+				eMessageLogin(e);
 			});
 	};
 
 	return (
 		<View style={tw("flex-1 justify-center items-center")}>
-			<TextInput
-				placeholder="Email"
-				onChangeText={(text) => setEmail(text)}
-				value={email}
-				style={tw("border p-2 w-64")}
-			/>
-			<TextInput
-				placeholder="Password"
-				onChangeText={(text) => setPassword(text)}
+			<Image source={{ uri: "/assets/logo.svg" }} />
+			<Text style={tw("text-4xl mb-3 font-semibold")}>
+				{variant === "login" ? "Sign In" : "Register"}
+			</Text>
+			{variant === "register" && (
+				<Input label="Username" onChange={setUserName} value={name} />
+			)}
+			<Input label="Email" onChange={setEmail} value={email} />
+			<Input
+				label="Password"
+				onChange={setPassword}
 				value={password}
-				secureTextEntry
-				style={tw("border p-2 w-64 mt-2")}
+				password
 			/>
-			<Button title="Login" onPress={handleLogin} />
+			<TouchableOpacity
+				onPress={variant === "login" ? handleLogin : signUp}
+				style={tw(
+					"bg-purple-700 py-2 px-6 rounded-md flex items-center justify-center w-64"
+				)}
+			>
+				<Text style={tw("text-white text-lg font-semibold")}>
+					{variant === "login" ? "Login" : "Sign Up"}
+				</Text>
+			</TouchableOpacity>
+			{message && <Text style={tw("text-purple-700 mt-2")}>{message}</Text>}
 			{error && <Text style={tw("text-red-500 mt-2")}>{error}</Text>}
+			<View style={tw("flex flex-row justify-center items-center text-center")}>
+				<Text style={tw("text-neutral-500 mt-3")}>
+					{variant === "login"
+						? "First time using UPS 2.0?"
+						: "Already have a account?"}
+				</Text>
+				<Text style={tw("ml-1 mt-3 underline")} onPress={toggleVariant}>
+					{variant === "login" ? "Create an account" : "Login"}
+				</Text>
+			</View>
 		</View>
 	);
 };
